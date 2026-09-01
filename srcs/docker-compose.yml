@@ -8,6 +8,8 @@ services:
       - wordpress
     volumes:
       - wordpress_volume:/var/www/html
+    networks:
+      - inception_network
 
   wordpress:
     container_name: wordpress
@@ -18,6 +20,8 @@ services:
       - wordpress_volume:/var/www/html
     env_file:
       - .env
+    networks:
+      - inception_network
 
   mariadb:
     container_name: mariadb
@@ -26,7 +30,13 @@ services:
       - mariadb_volume:/var/lib/mysql
     env_file:
       - .env
+    networks:
+      - inception_network
 
 volumes:
   wordpress_volume:
   mariadb_volume:
+
+networks:
+  inception_network:
+    driver: bridge
