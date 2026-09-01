@@ -1,10 +1,10 @@
 all: UP
 
 UP:
-	@docker compose up --build -d
+	@docker compose -f ./srcs/docker-compose.yml up --build -d
 
 stop:
-	@docker compose stop
+	@docker compose -f ./srcs/docker-compose.yml stop
 
 down:
-	@docker compose down
+	@docker compose -f ./srcs/docker-compose.yml down

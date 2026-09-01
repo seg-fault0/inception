@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: nginx
-    build: nginx/
+    build: requirements/nginx/
     ports: 
       - 443:443
     depends_on:
@@ -11,27 +11,21 @@ services:
 
   wordpress:
     container_name: wordpress
-    build: wordpress/
+    build: requirements/wordpress/
     depends_on:
       - mariadb
     volumes:
       - wordpress_volume:/var/www/html
+    env_file:
+      - .env
 
-    environment:
-      - MYSQL_DATABASE=wordpress_db
-      - MYSQL_USER=wp_user
-      - MYSQL_PASSWORD=secret_password
-      
   mariadb:
     container_name: mariadb
-    build: mariadb/
+    build: requirements/mariadb/
     volumes:
       - mariadb_volume:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=wordpress_db
-      - MYSQL_USER=wp_user
-      - MYSQL_PASSWORD=secret_password
-      - MYSQL_ROOT_PASSWORD=strong_root_password
+    env_file:
+      - .env
 
 volumes:
   wordpress_volume:
