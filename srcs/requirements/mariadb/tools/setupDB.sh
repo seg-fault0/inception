@@ -16,4 +16,4 @@ FLUSH PRIVILEGES;
 EOF
 fi
 
-exec mysqld_safe
+exec mysqld --user=mysql

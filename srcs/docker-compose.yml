@@ -10,6 +10,7 @@ services:
       - wordpress_volume:/var/www/html
     networks:
       - inception_network
+    restart: on-failure
 
   wordpress:
     container_name: wordpress
@@ -22,6 +23,7 @@ services:
       - .env
     networks:
       - inception_network
+    restart: on-failure
 
   mariadb:
     container_name: mariadb
@@ -32,6 +34,7 @@ services:
       - .env
     networks:
       - inception_network
+    restart: on-failure
 
 volumes:
   wordpress_volume:
