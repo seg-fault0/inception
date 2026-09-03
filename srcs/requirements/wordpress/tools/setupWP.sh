@@ -16,9 +16,9 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     sed -i "s/password_here/$MYSQL_PASSWORD/g" wp-config.php
     
     sed -i "s/localhost/mariadb:3306/g" wp-config.php
-
-    chown -R www-data:www-data /var/www/html/wordpress
-    chmod -R 755 /var/www/html/wordpress
 fi
+
+chown -R www-data:www-data /var/www/html/wordpress
+chmod -R 755 /var/www/html/wordpress
 
 exec /usr/sbin/php-fpm8.2 -F
