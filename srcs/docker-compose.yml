@@ -30,16 +30,26 @@ services:
     build: requirements/mariadb/
     volumes:
       - mariadb_volume:/var/lib/mysql
-    env_file:
+    env_file: 
       - .env
     networks:
       - inception_network
     restart: on-failure
 
-volumes:
-  wordpress_volume:
-  mariadb_volume:
-
 networks:
   inception_network:
     driver: bridge
+
+volumes:
+  mariadb_volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/wimam/data/mysql
+      o: bind
+  wordpress_volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/wimam/data/wordpress
+      o: bind
