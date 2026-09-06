@@ -24,6 +24,11 @@ services:
     networks:
       - inception_network
     restart: on-failure
+    secrets:
+      - wp_admin_pw
+      - wp_user_pw
+      - db_wp_user_pw
+
 
   mariadb:
     container_name: mariadb
@@ -35,6 +40,9 @@ services:
     networks:
       - inception_network
     restart: on-failure
+    secrets:
+      - db_alter_user_pw
+      - db_wp_user_pw
 
 networks:
   inception_network:
@@ -53,3 +61,13 @@ volumes:
       type: none
       o: bind
       device: /home/wimam/data/mariadb
+
+secrets:
+  wp_admin_pw:
+    file: ../secrets/wp_admin_pw
+  wp_user_pw:
+    file: ../secrets/wp_user_pw
+  db_alter_user_pw:
+    file: ../secrets/db_alter_user_pw
+  db_wp_user_pw:
+    file: ../secrets/db_wp_user_pw

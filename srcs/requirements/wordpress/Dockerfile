@@ -15,6 +15,7 @@ RUN apt-get update && apt-get -y install \
 	php8.2-xml \
 	php8.2-zip \
 	php8.2-mbstring \
+	netcat-openbsd \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY ./tools/setupWP.sh /
