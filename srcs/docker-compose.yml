@@ -3,7 +3,7 @@ services:
     container_name: nginx
     build: requirements/nginx/
     ports: 
-      - 443:443
+      - "${NGINX_PORT}:${NGINX_PORT}"
     depends_on:
       - wordpress
     volumes:
@@ -11,6 +11,8 @@ services:
     networks:
       - inception_network
     restart: on-failure
+    env_file:
+      - .env
 
   wordpress:
     container_name: wordpress
@@ -28,7 +30,6 @@ services:
       - wp_admin_pw
       - wp_user_pw
       - db_wp_user_pw
-
 
   mariadb:
     container_name: mariadb

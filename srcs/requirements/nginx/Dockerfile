@@ -10,6 +10,7 @@ RUN mkdir -p /etc/nginx/ssl && \
 
 COPY config/nginx.conf /etc/nginx/conf.d/wimam.conf
 
-EXPOSE 443
+COPY ./tools/script.sh /
+RUN chmod +x /script.sh
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/script.sh"]

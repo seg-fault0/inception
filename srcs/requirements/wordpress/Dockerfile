@@ -18,10 +18,7 @@ RUN apt-get update && apt-get -y install \
 	netcat-openbsd \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY ./tools/setupWP.sh /
-RUN chmod +x /setupWP.sh
+COPY ./tools/script.sh /
+RUN chmod +x /script.sh
 
-RUN sed -i 's|listen = /run/php/php8.2-fpm.sock|listen = 9000|' /etc/php/8.2/fpm/pool.d/www.conf
-RUN mkdir -p /run/php
-
-CMD ["/setupWP.sh"]
+CMD ["/script.sh"]

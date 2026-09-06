@@ -1,5 +1,8 @@
 #!/bin/sh
 
+sed -i "s|listen = /run/php/php8.2-fpm.sock|listen = 0.0.0.0:${WP_PORT}|" /etc/php/8.2/fpm/pool.d/www.conf
+mkdir -p /run/php
+
 cd /var/www/html
 
 if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
@@ -11,21 +14,21 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
     cp wp-config-sample.php wp-config.php
 
-	PW=$(cat /run/secrets/db_wp_user_pw)
+    PW=$(cat /run/secrets/db_wp_user_pw)
     sed -i "s/database_name_here/$MYSQL_DATABASE/g" wp-config.php
     sed -i "s/username_here/$MYSQL_USER/g" wp-config.php
-    sed -i "s/password_here/$PW/g" wp-config.php
-    sed -i "s/localhost/mariadb:3306/g" wp-config.php
+    sed -i "s|password_here|$PW|g" wp-config.php    
+    sed -i "s|localhost|mariadb:${MD_PORT}|g" wp-config.php
 
-	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
     mv wp-cli.phar /usr/local/bin/wp
 
-	while ! nc -z mariadb 3306; do
+    while ! nc -z mariadb ${MD_PORT}; do
         sleep 2
     done
 
-	ADMIN_PW=$(cat /run/secrets/wp_admin_pw)
+    ADMIN_PW=$(cat /run/secrets/wp_admin_pw)
     wp core install \
         --url="https://wimam.42.fr" \
         --title="My WordPress Site" \
