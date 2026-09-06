@@ -11,7 +11,7 @@ AUP=$(cat /run/secrets/db_alter_user_pw)
 UP=$(cat /run/secrets/db_wp_user_pw)
 
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
-
+	mysql_install_db --user=mysql --datadir=/var/lib/mysql
     mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
