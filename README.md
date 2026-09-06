@@ -56,10 +56,7 @@ Use the `Makefile` commands to control the project:
     ```bash
     make down
     ```
-*   **Stop and delete all containers, networks, and data volumes:**
-    ```bash
-    make clean
-    ```
+
 *   **Delete absolutely everything (including all Docker images):**
     ```bash
     make fclean
