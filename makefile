@@ -1,18 +1,19 @@
+COMPOSE = docker compose -f srcs/docker-compose.yml
+
 all: up
 
 up:
-	@docker compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo mkdir -p /home/wimam/data/wordpress /home/wimam/data/mariadb
+	$(COMPOSE) up -d --build
 
 down:
-	@docker compose -f ./srcs/docker-compose.yml down
+	$(COMPOSE) down
 
-re:
-	@docker compose -f ./srcs/docker-compose.yml up -d --build
+clean:
+	$(COMPOSE) down --rmi all
 
-fclean: down
-	docker rm $$(docker ps -qa);\
-	docker rmi -f $$(docker images -qa);\
-	docker volume rm $$(docker volume ls -q);\
-	docker network rm $$(docker network ls -q);\
+fclean: clean
+	$(COMPOSE) down --volumes
+	sudo rm -rf /home/wimam/data
 
 re: fclean all
