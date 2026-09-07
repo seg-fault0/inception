@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "[mysqld]" > /etc/mysql/mariadb.conf.d/99-inception.cnf
-echo "bind-address = 0.0.0.0" >> /etc/mysql/mariadb.conf.d/99-inception.cnf
-echo "port = ${MD_PORT}" >> /etc/mysql/mariadb.conf.d/99-inception.cnf
+echo "[mysqld]" > /etc/mysql/mariadb.conf.d/99-md.cnf
+echo "bind-address = 0.0.0.0" >> /etc/mysql/mariadb.conf.d/99-md.cnf
+echo "port = ${MD_PORT}" >> /etc/mysql/mariadb.conf.d/99-md.cnf
 
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld

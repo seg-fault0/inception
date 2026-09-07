@@ -1,5 +1,9 @@
 #!/bin/sh
 
+while ! nc -z mariadb ${MD_PORT}; do
+    sleep 2
+done
+
 sed -i "s|listen = /run/php/php8.2-fpm.sock|listen = 0.0.0.0:${WP_PORT}|" /etc/php/8.2/fpm/pool.d/www.conf
 mkdir -p /run/php
 
@@ -23,10 +27,6 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
     mv wp-cli.phar /usr/local/bin/wp
-
-    while ! nc -z mariadb ${MD_PORT}; do
-        sleep 2
-    done
 
     ADMIN_PW=$(cat /run/secrets/wp_admin_pw)
     wp core install \
