@@ -49,6 +49,6 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 fi
 
 chown -R www-data:www-data /var/www/html/wordpress
-chmod -R 755 /var/www/html/wordpress
+chmod -R /var/www/html/wordpress
 
 exec /usr/sbin/php-fpm8.2 -F

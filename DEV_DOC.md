@@ -17,11 +17,8 @@ The project relies on environment variables and file-based secrets to run secure
    Create a `.env` file inside the `srcs/` directory. This file holds non-sensitive configurations and environment variables required by Docker Compose.
    *Example `srcs/.env`:*
    ```ini
-	DOMAIN_NAME=wimam.42.fr
-
 	MYSQL_DATABASE=wordpress
 
-	MYSQL_SUPER_USER=mdroot
 	MYSQL_USER=mduser
 
 	WP_SUPER_USER=superwalid
@@ -38,7 +35,6 @@ The project relies on environment variables and file-based secrets to run secure
 2. **Secrets (`secrets/` directory):**
    Create a `secrets/` folder in the root of the project to store sensitive passwords. Docker Compose will read these files and inject them securely into the containers. 
    Create the following files and paste the corresponding plain-text passwords inside them:
-   * `secrets/db_alter_user_pw`
    * `secrets/db_wp_user_pw`
    * `secrets/wp_admin_pw`
    * `secrets/wp_user_pw`
