@@ -19,10 +19,10 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     cp wp-config-sample.php wp-config.php
 
     PW=$(cat /run/secrets/db_wp_user_pw)
-    sed -i "s/database_name_here/$MYSQL_DATABASE/g" wp-config.php
-    sed -i "s/username_here/$MYSQL_USER/g" wp-config.php
-    sed -i "s|password_here|$PW|g" wp-config.php    
-    sed -i "s|localhost|mariadb:${MD_PORT}|g" wp-config.php
+    sed -i "s|database_name_here|$MYSQL_DATABASE|" wp-config.php
+    sed -i "s|username_here|$MYSQL_USER|" wp-config.php
+    sed -i "s|password_here|$PW|" wp-config.php    
+    sed -i "s|localhost|mariadb:${MD_PORT}|" wp-config.php
 
     wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
