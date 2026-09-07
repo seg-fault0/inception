@@ -9,8 +9,10 @@ up:
 down:
 	$(COMPOSE) down
 
-fclean:
+clean:
 	$(COMPOSE) down --rmi all
+
+fclean: clean
 	$(COMPOSE) down --volumes
 	sudo rm -rf /home/wimam/data
 
