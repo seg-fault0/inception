@@ -24,6 +24,11 @@ This project uses a `Makefile` to simplify Docker Compose commands.
   make down
   ```
 
+* **To stops containers and cleans up images.**
+  ```bash
+  make clean
+  ```
+
 * **To perform a complete clean-up:**
   ```bash
   make fclean
